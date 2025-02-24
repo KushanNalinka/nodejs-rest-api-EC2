@@ -1,11 +1,11 @@
-import { Router } from "express";
-import { createNewUser, getAllUsers } from "../controllers/userController";
+const express = require("express");
+const { createNewUser, getAllUsers } = require("../controllers/userController");
 
-const router = Router();
+const router = express.Router();
 
 // create a user
 router.post("/", createNewUser);
 // get all users
 router.get("/", getAllUsers);
 
-export default router;
+module.exports = router;
