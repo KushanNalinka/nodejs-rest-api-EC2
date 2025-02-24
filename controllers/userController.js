@@ -1,4 +1,4 @@
-const User = require("../models/user");
+import { findOne, create, find } from "../models/user";
 
 const createNewUser = async (req, res, next) => {
   try {
@@ -9,14 +9,14 @@ const createNewUser = async (req, res, next) => {
     }
 
     // check if user already exists
-    const isUserExists = await User.findOne({ email });
+    const isUserExists = await findOne({ email });
 
     if (isUserExists) {
       res.status(404);
       return next(new Error("User already exists"));
     }
 
-    const user = await User.create({
+    const user = await create({
       name,
       email,
     });
@@ -34,7 +34,7 @@ const createNewUser = async (req, res, next) => {
 
 const getAllUsers = async (req, res, next) => {
   try {
-    const users = await User.find();
+    const users = await find();
 
     res.status(200).json({
       success: true,
@@ -46,7 +46,7 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
-module.exports = {
+export default {
   createNewUser,
   getAllUsers,
 };
